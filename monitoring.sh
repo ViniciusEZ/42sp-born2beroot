@@ -12,7 +12,7 @@ get_system_info() {
     DISK_PERC=$(df --total | grep "total" | awk '{print $5}')
     CPU_LOAD=$(top -bn1 | grep "Cpu(s)" | awk '{print 100 - $8}')
     LAST_BOOT=$(who -b | awk '{print $3 " " $4}')
-    LVM_USE=$(lsblk | grep "lvm" &> /dev/null && echo "yes" || echo "no")
+    LVM_USE=$(lsblk -o TYPE | grep -qw "lvm" && echo "yes" || echo "no")
     TCP_CONN=$(ss -t state established | grep -c ESTAB)
     USER_LOG=$(who | wc -l)
     IP=$(hostname -I | awk '{print $1}')
