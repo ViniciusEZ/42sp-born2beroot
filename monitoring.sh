@@ -13,7 +13,7 @@ get_system_info() {
     CPU_LOAD=$(top -bn1 | grep "Cpu(s)" | awk '{print 100 - $8}')
     LAST_BOOT=$(who -b | awk '{print $3 " " $4}')
     LVM_USE=$(lsblk -o TYPE | grep -qw "lvm" && echo "yes" || echo "no")
-    TCP_CONN=$(ss -t state established | grep -c ESTAB)
+    TCP_CONN=$(ss -ta | grep ESTAB | wc -l)
     USER_LOG=$(who | wc -l)
     IP=$(hostname -I | awk '{print $1}')
     MAC=$(ip link show | awk '/ether/ {print $2; exit}')
