@@ -19,7 +19,7 @@ get_system_info() {
     MAC=$(ip link show | awk '/ether/ {print $2; exit}')
     SUDO_CMDS=$(journalctl _COMM=sudo | grep -c COMMAND)
 
-echo "Architecture: $ARCH
+wall "Architecture: $ARCH
 CPU physical : $PHYSICAL_CPU
 vCPU : $VIRTUAL_CPU
 Memory Usage: $MEM_USED/${MEM_TOTAL}MB (${MEM_PERC}%)
